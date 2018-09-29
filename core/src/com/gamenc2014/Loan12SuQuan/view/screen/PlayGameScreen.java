@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
@@ -110,6 +111,9 @@ public class PlayGameScreen extends AbstractScreen {
 	public PlayGameScreen(Object[] inputData, BaoVeBienCuong game) {
 		super(inputData, game);
 		parseInputData(inputData);
+//		SCR_WIDTH = 1280;
+//		SCR_HEIGHT = 720;
+
 		scale_x = SCR_WIDTH / 800f;
 		scale_y = SCR_HEIGHT / 480f;
 
@@ -123,17 +127,16 @@ public class PlayGameScreen extends AbstractScreen {
 
 		this.isPause = false;
 
-		camera = new OrthographicCamera();
+		camera = new OrthographicCamera();//SCR_WIDTH, SCR_HEIGHT);
 		camera.zoom = 1;
 
-		camera.position.set(BG_WIDTH / 2, BG_HEIGHT / 2, 0);
+		camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
 		viewport = new StretchViewport(SCR_WIDTH, SCR_HEIGHT, camera);
 
 		stage.setViewport(viewport);
-//		stage.setCamera(camera);
 
 		buttonStage = new Stage();
-        buttonStage.setViewport(viewport);
+//        buttonStage.setViewport(viewport);
 		uiUpgrade = new UIUpgrade(baoVeBienCuong.buttonDataManager, camera,
 				SCR_WIDTH, SCR_HEIGHT, gameLogic, buttonStage, baoVeBienCuong,
 				this);
@@ -169,8 +172,8 @@ public class PlayGameScreen extends AbstractScreen {
 		this.drawGold = new DrawGold(gameLogic.getGoldList(),
 				game.enemyDataManager.getGoldAnimation(), batch, gameLogic);
 
-		initializeControlMenu();
-		initializeMagicButton();
+		initializeControlMenu();//son
+		initializeMagicButton();//son
 
 		addTowerListener();
 		addShogunListener();
@@ -669,8 +672,10 @@ public class PlayGameScreen extends AbstractScreen {
 				zoomInImage.getImageUp()), new TextureRegionDrawable(
 				zoomInImage.getImageDown()));
 
-		zoom.setBounds(160 * scale_x, SCR_HEIGHT - 64 * scale_y, 64 * scale_x,
-				64 * scale_y);
+        zoom.setBounds(160 * scale_x, SCR_HEIGHT - 64 * scale_y, 64 * scale_x,
+                64 * scale_y);
+
+		//son cmt
 
 		zoom.addListener(new ClickListener() {
 			@Override
@@ -736,8 +741,9 @@ public class PlayGameScreen extends AbstractScreen {
 
 		int tempAlign = (int) (SCR_WIDTH - 5 * 80 * scale_x);
 
+		BitmapFont font = baoVeBienCuong.fontDataManager.getBasicFont();
 		for (int i = 0; i < price.length; i++) {
-			price[i] = new Label("", new LabelStyle());//baoVeBienCuong.skin);
+			price[i] = new Label("", new LabelStyle(font, Color.WHITE));//baoVeBienCuong.skin);
 			price[i].setBounds(tempAlign + (i * 80 + 40) * scale_x, 0,
 					64 * scale_x, 32);
 		}

@@ -32,7 +32,7 @@ public class InputListener implements GestureListener {
 		this.cam = camera;
 		this.screen = screen;
 
-//		configCoordinate(screen.getPosition());
+		configCoordinate(screen.getPosition());
 	}
 
 	@Override
@@ -46,14 +46,14 @@ public class InputListener implements GestureListener {
 		int coorX = (int) screenToWorldX(x);
 		int coorY = (int) screenToWorldY(y);
 
-//		if (!screen.isInfoWindowOpen()) {
-//            for (int i = 0; i < this.position.length; i++) {
-//                if (this.position[i].dst(coorX, coorY) < 64) {
-//                    screen.setSelectedCastleIndex(i);
-//                    break;
-//                }
-//            }
-//        }
+		if (!screen.isInfoWindowOpen()) {
+            for (int i = 0; i < this.position.length; i++) {
+                if (this.position[i].dst(coorX, coorY) < 64) {
+                    screen.setSelectedCastleIndex(i);
+                    break;
+                }
+            }
+        }
 		return false;
 	}
 

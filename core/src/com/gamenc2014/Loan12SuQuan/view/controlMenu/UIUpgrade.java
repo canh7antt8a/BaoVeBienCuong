@@ -1,7 +1,9 @@
 package com.gamenc2014.Loan12SuQuan.view.controlMenu;
 
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -84,8 +86,9 @@ public class UIUpgrade {
 
 		this.price = new Label[4];
 
+		BitmapFont font = baoVeBienCuong.fontDataManager.getBasicFont();
 		for (int i = 0; i < price.length; i++) {
-			price[i] = new Label("", new Label.LabelStyle());//game.skin);
+			price[i] = new Label("", new Label.LabelStyle(font, Color.WHITE));//game.skin);
 		}
 	}
 
