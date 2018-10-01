@@ -4,7 +4,7 @@ sourceCompatibility = '1.7'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 ext {
-	mainClassName = "com.gamenc2014.loan12suquan.IOSLauncher"
+	mainClassName = "com.leaptechjsc.anakachyofthe12warlords.IOSLauncher"
 }
 
 launchIPhoneSimulator.dependsOn build
