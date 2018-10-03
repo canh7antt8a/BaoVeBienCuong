@@ -117,6 +117,9 @@ public class PlayGameScreen extends AbstractScreen {
 		scale_x = SCR_WIDTH / 800f;
 		scale_y = SCR_HEIGHT / 480f;
 
+//		scale_x = 800.0f/SCR_WIDTH;
+//		scale_y = 480.0f/SCR_HEIGHT;
+
 		this.actionType = ICommonConstants.NOTHING;
 		this.gameLogic = new GameLogic((Integer) inputData[0], 0,
 				(Integer) inputData[1], soundDataManager, game);
@@ -127,7 +130,7 @@ public class PlayGameScreen extends AbstractScreen {
 
 		this.isPause = false;
 
-		camera = new OrthographicCamera();//SCR_WIDTH, SCR_HEIGHT);
+		camera = new OrthographicCamera(SCR_WIDTH, SCR_HEIGHT);
 		camera.zoom = 1;
 
 		camera.position.set(SCR_WIDTH / 2, SCR_HEIGHT / 2, 0);
@@ -258,8 +261,8 @@ public class PlayGameScreen extends AbstractScreen {
 			float zoom = camera.zoom;
 			camera.zoom = 1;
 
-			buttonStage.act(delta);
-			buttonStage.draw();
+//			buttonStage.act(delta);
+//			buttonStage.draw();
 
 			camera.zoom = zoom;
 		} else {
@@ -281,9 +284,10 @@ public class PlayGameScreen extends AbstractScreen {
 
 			batch.end();
 
-			buttonStage.act(delta);
-			buttonStage.draw();
 		}
+
+        buttonStage.act(delta);
+        buttonStage.draw();
 	}
 
 	@Override
@@ -491,7 +495,7 @@ public class PlayGameScreen extends AbstractScreen {
 						enableListener = false;
 						actionType = ICommonConstants.BUILDING;
 						super.dragStart(event, x, y, pointer);
-						buttonStage.getActors().clear();
+//						buttonStage.getActors().clear();
 						buttonStage.addActor(tower[j]);
 						turnOffUIUpgrade();
 					}
@@ -518,7 +522,7 @@ public class PlayGameScreen extends AbstractScreen {
 				public void dragStop(InputEvent event, float x, float y,
 						int pointer) {
 					if (towerGold[j] == false) {
-						addActorToStage();
+//						addActorToStage();
 						super.dragStop(event, x, y, pointer);
 						enableListener = true;
 						drawGrid.resetDragCell();
@@ -532,8 +536,10 @@ public class PlayGameScreen extends AbstractScreen {
 										- camera.position.y + (-event
 										.getStageY() + SCR_HEIGHT / 2)
 										* camera.zoom)));
-						actionType = ICommonConstants.NOTHING;
+
+                        actionType = ICommonConstants.NOTHING;
 					}
+
 				}
 
 			});
@@ -569,7 +575,7 @@ public class PlayGameScreen extends AbstractScreen {
 						int pointer) {
 					if (shogunGold[0] == false) {
 						if (gameLogic.isHasShogunTower(gameLogic.getShogunID(0)) == false) {
-							buttonStage.getActors().clear();
+//							buttonStage.getActors().clear();
 							turnOffUIUpgrade();
 							buttonStage.addActor(shogun);
 							enableListener = false;
@@ -746,8 +752,10 @@ public class PlayGameScreen extends AbstractScreen {
 		BitmapFont font = baoVeBienCuong.fontDataManager.getBasicFont();
 		for (int i = 0; i < price.length; i++) {
 			price[i] = new Label("", new LabelStyle(font, Color.WHITE));//baoVeBienCuong.skin);
-			price[i].setBounds(tempAlign + (i * 80 + 40) * scale_x, 0,
-					64 * scale_x, 32);
+//			price[i].setBounds(tempAlign + (i * 80 + 40) * scale_x, 50,
+//					12, 12);
+            price[i].setFontScale(.25f);
+            price[i].setPosition(tempAlign + (i * 80 + 40) * scale_x, 20);
 		}
 	}
 
@@ -798,7 +806,7 @@ public class PlayGameScreen extends AbstractScreen {
 						(int) (BG_HEIGHT - camera.position.y + (-event
 								.getStageY() + SCR_HEIGHT / 2) * camera.zoom)
 								/ ICommonConstants.DEFAULT_TILE_SIZE));
-				buttonStage.getActors().clear();
+//				buttonStage.getActors().clear();
 				turnOffUIUpgrade();
 				buttonStage.addActor(trap);
 			}
@@ -806,7 +814,7 @@ public class PlayGameScreen extends AbstractScreen {
 			@Override
 			public void dragStop(InputEvent event, float x, float y, int pointer) {
 				super.dragStop(event, x, y, pointer);
-				addActorToStage();
+//				addActorToStage();
 				enableListener = true;
 				drawGrid.resetDragCell();
 				trap.setBounds(0, 5, 64 * scale_x, 64 * scale_y);
@@ -835,7 +843,7 @@ public class PlayGameScreen extends AbstractScreen {
 					int pointer) {
 				float tempCooldownPercent = gameLogic.getROFCooldownPercent();
 				if (tempCooldownPercent >= 1f) {
-					buttonStage.getActors().clear();
+//					buttonStage.getActors().clear();
 					buttonStage.addActor(ROF);
 					turnOffUIUpgrade();
 					actionType = ICommonConstants.MAGIC;
@@ -871,7 +879,7 @@ public class PlayGameScreen extends AbstractScreen {
 
 				float tempCooldownPercent = gameLogic.getROFCooldownPercent();
 				if (tempCooldownPercent >= 1f) {
-					addActorToStage();
+//					addActorToStage();
 					actionType = ICommonConstants.NOTHING;
 					gameLogic
 							.useMagic(

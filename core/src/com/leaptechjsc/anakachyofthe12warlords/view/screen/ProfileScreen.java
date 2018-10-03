@@ -57,8 +57,8 @@ public class ProfileScreen extends AbstractScreen {
 		game.screenSoundManager.stopAll();
 		game.screenSoundManager.play(ScreenSoundDataManager.PROFILE, true);
 
-		SCR_WIDTH = 1280;
-		SCR_HEIGHT = 720;
+		SCR_WIDTH = 800;
+		SCR_HEIGHT = 480;
 
 		scale_x = 800f / 1280f;
 		scale_y = 480f / 720f;
@@ -227,7 +227,7 @@ public class ProfileScreen extends AbstractScreen {
 
 		batch.begin();
 		batch.draw(baoVeBienCuong.profileScreenDataManager.getDownBackground(),
-				0, 0);
+				-25, -25);
 		batch.end();
 
 		contentTable.act(delta);

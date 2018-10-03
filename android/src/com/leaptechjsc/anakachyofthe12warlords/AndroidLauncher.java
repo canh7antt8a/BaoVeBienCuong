@@ -110,7 +110,7 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 
 	}
 	public void openExitDialog() {
-		AlertDialog.Builder alertboxDowload = new AlertDialog.Builder(this);
+		AlertDialog.Builder alertboxDowload = new AlertDialog.Builder(AndroidLauncher.this);
 		alertboxDowload.setTitle(R.string.confirm_dialog_title);
 		alertboxDowload.setMessage(R.string.exit_app_dialog_message);
 		alertboxDowload.setCancelable(false);
@@ -137,6 +137,7 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 		RelativeLayout layout = new RelativeLayout(this);
 		// Create the libgdx View
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+
 		View gameView = initializeForView(baoVeBienCuong, config);
 
 
@@ -147,7 +148,7 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 
 		// Create an ad request.
 		PublisherAdRequest adRequestBuilder = new PublisherAdRequest.Builder().addTestDevice("65A1B8F5E230F0557D9EB2871C2492E5").build();
-//		layout.addView(gameView);
+		layout.addView(gameView);
 
 		// Add the AdMob view
 		RelativeLayout.LayoutParams adParams =

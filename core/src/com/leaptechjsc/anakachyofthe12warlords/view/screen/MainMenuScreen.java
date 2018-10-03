@@ -100,7 +100,7 @@ public class MainMenuScreen extends AbstractScreen {
 		});
 
 		MoveToAction action_1 = new MoveToAction();
-		action_1.setPosition(SCR_WIDTH - buttonWidth - 70, SCR_HEIGHT - 2
+		action_1.setPosition(SCR_WIDTH - buttonWidth - 70, SCR_HEIGHT - 3
 				* buttonHeight);
 		action_1.setDuration(0.5f);
 		play.addAction(action_1);
@@ -113,6 +113,7 @@ public class MainMenuScreen extends AbstractScreen {
 				upgradeImage.getImageDown()));
 		setting.setBounds(SCR_WIDTH, SCR_HEIGHT - 4 * buttonHeight - 20,
 				buttonWidth, buttonHeight);
+
 		setting.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -123,8 +124,8 @@ public class MainMenuScreen extends AbstractScreen {
 		});
 
 		MoveToAction action_2 = new MoveToAction();
-		action_2.setPosition(SCR_WIDTH - buttonWidth - 70, SCR_HEIGHT - 3
-				* buttonHeight);
+		action_2.setPosition(SCR_WIDTH - buttonWidth - 70, SCR_HEIGHT - 4
+				* buttonHeight - 20);
 		action_2.setDuration(1);
 		setting.addAction(action_2);
 
@@ -134,8 +135,8 @@ public class MainMenuScreen extends AbstractScreen {
 		achieve = new ImageButton(new TextureRegionDrawable(
 				achieveImage.getImageUp()), new TextureRegionDrawable(
 				achieveImage.getImageDown()));
-		achieve.setBounds(SCR_WIDTH, SCR_HEIGHT - 5 * buttonHeight - 40,
-				buttonWidth, buttonHeight);
+//		achieve.setBounds(SCR_WIDTH, SCR_HEIGHT - 6 * buttonHeight - 40,
+//				buttonWidth, buttonHeight);
 
 		achieve.addListener(new ClickListener() {
 			@Override
@@ -149,13 +150,13 @@ public class MainMenuScreen extends AbstractScreen {
 			}
 		});
 
-		MoveToAction action_3 = new MoveToAction();
-		action_3.setPosition(SCR_WIDTH - buttonWidth - 70, SCR_HEIGHT - 4
-				* buttonHeight);
-		action_3.setDuration(1.5f);
-		achieve.addAction(action_3);
+//		MoveToAction action_3 = new MoveToAction();
+//		action_3.setPosition(SCR_WIDTH - buttonWidth - 70, SCR_HEIGHT - 6
+//				* buttonHeight);
+//		action_3.setDuration(1.5f);
+//		achieve.addAction(action_3);
 
-		standardButton = new ImageButton[2];
+		standardButton = new ImageButton[1];
 		ButtonImage tempImage;
 		for (int i = 0; i < standardButton.length; i++) {
 			tempImage = baoVeBienCuong.buttonDataManager.getStandardButton(i);
@@ -179,7 +180,7 @@ public class MainMenuScreen extends AbstractScreen {
 		stage.addActor(table);
 		stage.addActor(play);
 		stage.addActor(setting);
-		stage.addActor(achieve);
+//		stage.addActor(achieve);
 		for (int i = 0; i < standardButton.length; i++) {
 			stage.addActor(standardButton[i]);
 		}
@@ -327,12 +328,12 @@ public class MainMenuScreen extends AbstractScreen {
 			}
 		});
 
-		standardButton[1].addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				baoVeBienCuong.requestHandler.shareGetCoin();
-			}
-		});
+//		standardButton[1].addListener(new ClickListener() {
+//			@Override
+//			public void clicked(InputEvent event, float x, float y) {
+//				baoVeBienCuong.requestHandler.shareGetCoin();
+//			}
+//		});
 
 	}
 
