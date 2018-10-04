@@ -3,6 +3,7 @@ package com.leaptechjsc.anakachyofthe12warlords;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,10 +20,10 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-import com.leaptechjsc.anakachyofthe12warlords.view.loadingscreen.SplashScreen;
 
 import java.util.Random;
 
@@ -31,10 +32,13 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 	public RequestHandler requestHandler;
 
 	private static final String AD_BANNER_ID = "/93656639/96785321";
+	private static final String AD_INTERSTITIAL_ID = "/93656639/71524386";
 	private static final String AD_VIDEO_ID = "/93656639/57386192";
 
 
+
 	private PublisherAdView adView = null;
+	private PublisherInterstitialAd mPublisherInterstitialAd = null;
 	private RewardedVideoAd mRewardedVideoAd = null;
 
 	@SuppressLint("HandlerLeak")
@@ -79,7 +83,7 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 //						interstitial.setAdListener(MainActivity.this);
 //
 //					}
-
+					showAdInterstitialview();
 					break;
 
 				case IRequestHandler.ADVIEW_HIDE:
@@ -146,8 +150,13 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 		adView.setAdSizes(AdSize.BANNER);
 		adView.setAdUnitId(AD_BANNER_ID);
 
+		mPublisherInterstitialAd = new PublisherInterstitialAd(this);
+//		mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+		mPublisherInterstitialAd.setAdUnitId(AD_INTERSTITIAL_ID);
+		mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+
 		// Create an ad request.
-		PublisherAdRequest adRequestBuilder = new PublisherAdRequest.Builder().addTestDevice("65A1B8F5E230F0557D9EB2871C2492E5").build();
+//		PublisherAdRequest adRequestBuilder = new PublisherAdRequest.Builder().build();
 		layout.addView(gameView);
 
 		// Add the AdMob view
@@ -158,11 +167,11 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 		adParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
 		layout.addView(adView, adParams);
-		adView.loadAd(adRequestBuilder);
+		adView.loadAd(new PublisherAdRequest.Builder().build());
 
 		setContentView(layout);
 
-//        adView.setBackgroundColor(Color.BLACK);
+//		adView.setBackgroundColor(Color.BLACK);
 		adView.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -177,7 +186,7 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 				// Code to be executed when an ad request fails.
 
 				Log.d("LIBGDX", "================> onAdFailedToLoad");
-				hideAdview();
+//				hideAdview();
 			}
 
 			@Override
@@ -227,6 +236,8 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 
 	public void showAdview() {
 		if(adView == null) return;
+
+		adView.loadAd(new PublisherAdRequest.Builder().build());
 		Log.d("LIBGDX", "================> showAdview 1");
 		this.runOnUiThread(new Runnable() {
 			@Override
@@ -240,6 +251,17 @@ public class AndroidLauncher extends AndroidApplication implements RewardedVideo
 			}
 		});
 	}
+
+
+	public void showAdInterstitialview() {
+		if (mPublisherInterstitialAd.isLoaded()) {
+			mPublisherInterstitialAd.show();
+		} else {
+			Log.d("TAG", "The interstitial wasn't loaded yet.");
+		}
+		mPublisherInterstitialAd.loadAd(new PublisherAdRequest.Builder().build());
+	}
+
 
 
 	int indexLoadVideo = 0;

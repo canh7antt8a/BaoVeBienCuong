@@ -84,14 +84,14 @@ public class MainMenuScreen extends AbstractScreen {
 			public void clicked(InputEvent event, float x, float y) {
 				baoVeBienCuong.screenSoundManager.play(
 						ScreenSoundDataManager.CLICK, false);
+
+				baoVeBienCuong.requestHandler.hideAd();
 				if (!baoVeBienCuong.isLoaded()) {
 					Gdx.app.debug("LOGGAME", "Vao thang thu 1");
-					baoVeBienCuong.requestHandler.hideAd();
 					baoVeBienCuong.setScreen(new PreMapLoadingScreen(null,
 							baoVeBienCuong));
 				} else {
 					Gdx.app.debug("LOGGAME", "Vao thang thu 2");
-					baoVeBienCuong.requestHandler.hideAd();
 					baoVeBienCuong.setScreen(new MapSelectionScreen(null,
 							baoVeBienCuong));
 
